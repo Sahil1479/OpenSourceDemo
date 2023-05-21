@@ -1,0 +1,29 @@
+name: Celebratory GIF
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  celebrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Comment with celebratory GIF
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const context = github.context;
+
+            const commentBody = `🎉 This issue has been closed! Enjoy this celebratory GIF: ![Celebration](${https://media.tenor.com/LCJNz0f5t1sAAAAC/racc-racc-did-it.gif})`;
+              github.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
+
