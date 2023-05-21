@@ -21,7 +21,7 @@ jobs:
             const ctx = github.context;
 
             if (context.eventName === 'pull_request') {
-              const commentBody = `🎉 Congratulations on merging this pull request! Enjoy this celebratory GIF: ![Celebration](${gifUrl})`;
+              const commentBody = `🎉 Congratulations on merging this pull request! Enjoy this celebratory GIF: ![Celebration](https://media.tenor.com/LCJNz0f5t1sAAAAC/racc-racc-did-it.gif)`;
               github.issues.createComment({
                 issue_number: ctx.issue.number,
                 owner: ctx.repo.owner,
@@ -29,7 +29,7 @@ jobs:
                 body: commentBody
               });
             } else if (context.eventName === 'issues') {
-              const commentBody = `🎉 This issue has been closed! Enjoy this celebratory GIF: ![Celebration](${gifUrl})`;
+              const commentBody = `🎉 This issue has been closed! Enjoy this celebratory GIF: ![Celebration](https://media.tenor.com/LCJNz0f5t1sAAAAC/racc-racc-did-it.gif)`;
               github.issues.createComment({
                 issue_number: ctx.issue.number,
                 owner: ctx.repo.owner,
