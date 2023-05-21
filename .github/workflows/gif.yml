@@ -16,6 +16,7 @@ jobs:
       - name: Comment with celebratory GIF
         uses: actions/github-script@v4
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const commentBody = `🎉 This issue has been closed! Enjoy this celebratory GIF: ![Celebration](https://media.tenor.com/LCJNz0f5t1sAAAAC/racc-racc-did-it.gif)`;
               github.issues.createComment({
