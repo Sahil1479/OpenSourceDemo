@@ -16,6 +16,7 @@ jobs:
       - name: Comment with celebratory GIF
         uses: actions/github-script@v4
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const context = github.context;
 
