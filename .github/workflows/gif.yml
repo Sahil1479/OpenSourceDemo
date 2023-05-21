@@ -1,4 +1,4 @@
-name: Celebratory GIF
+name: Comment on Closed Issue with GIF
 
 on:
   issues:
@@ -6,22 +6,16 @@ on:
       - closed
 
 jobs:
-  celebrate:
+  commentOnClosedIssue:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Comment with celebratory GIF
-        uses: actions/github-script@v4
+      - name: Comment with GIF
+        uses: peter-evans/create-issue-comment@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const commentBody = `🎉 This issue has been closed! Enjoy this celebratory GIF: ![Celebration](https://media.tenor.com/LCJNz0f5t1sAAAAC/racc-racc-did-it.gif)`;
-              github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: commentBody
-            });
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ![GIF Image](https://github.com/Sahil1479/OpenSourceDemo/blob/master/celebration-gif.gif)
