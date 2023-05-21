@@ -1,24 +1,29 @@
-name: Comment on New Issue with GIF
-
+name: Add Comment to New Issue
 on:
   issues:
     types:
       - opened
 
 jobs:
-  commentOnNewIssue:
+  add-comment:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Comment with GIF
-        run: |
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "body": "![GIF Image](https://github.com/Sahil1479/OpenSourceDemo/blob/master/celebration-gif.gif)"
-            }' \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
+      - name: Add Comment to New Issue
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issueNumber = context.payload.issue.number;
+            const comment = `Thank you for creating this issue! We will look into it.`;
+            const octokit = github.getOctokit(token);
+
+            octokit.issues.createComment({
+              owner,
+              repo,
+              issue_number: issueNumber,
+              body: comment
+            });
