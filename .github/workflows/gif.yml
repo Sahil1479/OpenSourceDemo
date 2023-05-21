@@ -19,7 +19,7 @@ jobs:
             const { owner, repo } = context.repo;
             const issueNumber = context.payload.issue.number;
             const comment = `Thank you for creating this issue! We will look into it.`;
-            const octokit = github.getOctokit(token);
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
             octokit.issues.createComment({
               owner,
