@@ -14,17 +14,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Comment with GIF
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const issueNumber = context.payload.issue.number;
-            const gifImage = '![GIF Image](https://github.com/Sahil1479/OpenSourceDemo/blob/master/celebration-gif.gif)';
-            const commentBody = `${gifImage}\n\nThis issue has been closed.`;
-            
-            const { data: comment } = await github.issues.createComment({
-              issue_number: issueNumber,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: commentBody
-            });
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "body": "![GIF Image](https://github.com/Sahil1479/OpenSourceDemo/blob/master/celebration-gif.gif)\n\nThis issue has been closed."
+            }' \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
