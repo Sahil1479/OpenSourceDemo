@@ -1,5 +1,5 @@
-def f():
-hello = 1
-          world = 3.0
-          follow = 2.0
-  return 0
+def main():
+ var1 = 1
+ var2 = 2
+ var3 = 3
+ return 0
