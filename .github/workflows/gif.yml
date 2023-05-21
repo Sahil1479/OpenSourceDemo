@@ -1,12 +1,12 @@
-name: Comment on Closed Issue with GIF
+name: Comment on New Issue with GIF
 
 on:
   issues:
     types:
-      - closed
+      - opened
 
 jobs:
-  commentOnClosedIssue:
+  commentOnNewIssue:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,6 +19,6 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "body": "![GIF Image](https://github.com/Sahil1479/OpenSourceDemo/blob/master/celebration-gif.gif)\n\nThis issue has been closed."
+              "body": "![GIF Image](https://github.com/Sahil1479/OpenSourceDemo/blob/master/celebration-gif.gif)"
             }' \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
