@@ -21,7 +21,7 @@ jobs:
             const ctx = github.context;
 
             const commentBody = `🎉 This issue has been closed! Enjoy this celebratory GIF: ![Celebration](${https://media.tenor.com/LCJNz0f5t1sAAAAC/racc-racc-did-it.gif})`;
-              github.issues.createComment({
+            github.issues.createComment({
                 issue_number: ctx.issue.number,
                 owner: ctx.repo.owner,
                 repo: ctx.repo.repo,
