@@ -1,18 +1,20 @@
-name: Add comment
 on:
-  issues:
-    types:
-      - labeled
+  # Trigger the workflow on push or pull request
+  pull_request:
+     types:
+      - closed
+
 jobs:
-  add-comment:
-    if: github.event.label.name == 'help-wanted'
+  comment:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
-      - name: Add comment
-        uses: peter-evans/create-or-update-comment@v3
+      - uses: actions/github-script@v5
         with:
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            This issue is available for anyone to work on. **Make sure to reference this issue in your pull request.** :sparkles: Thank you for your contribution! :sparkles:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
